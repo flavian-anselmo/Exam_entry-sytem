@@ -1,4 +1,11 @@
+/*this is an Exam entry program,one can admit students in the system
+and assign them marks for the mainexam and cat and from that the program
+can compute the grades and the average .The program finds the the student
+that had the highest marks */
+//{my freshman year project first semster}
+//I did this project to learn how file management works in C programming
 #include<stdio.h>
+#include "login_sys.c"
 #define N 16
 #define G 5
 
@@ -34,6 +41,7 @@ int register_std(int j,int num){
     //close the databse
     fclose(fp);
 }//end of registration
+
 int get_list(){
     //get the list of students
     printf("Entered the get_list function to fetch list:\n");
@@ -137,10 +145,11 @@ int get_mark(int j,int num){
         j++;
     }
     fclose(NL);//CLOSE THE EXAM FILE
-}
+}//end of get mark function
+
 int get_higest_low_score(int num,int j){
     FILE *KL;//FILE pointer to the structure
-    KL=fopen("students_database.txt","r");
+    KL=fopen("students_database.txt","r");//OPEN FILE IN READ MODE
     num=0;//get the list length
     int p=1;
     char mark_list[100];
@@ -157,7 +166,7 @@ int get_higest_low_score(int num,int j){
     for(j=0;j<(p-2);j++){
        for(num=0;num<(p-2);num++){
            if(arr_student[j].avg < arr_student[num].avg){
-               //make the swap
+               //make the swap using the third variable TEMP
                TEMP=arr_student[j].avg;
                arr_student[j].avg=arr_student[num].avg;
                arr_student[num].avg=TEMP;
@@ -171,7 +180,22 @@ int get_higest_low_score(int num,int j){
     printf("***The highest student got:../--%d\n",arr_student[((p-2)-1)].avg);
     printf("***The lowest student got:../---%d\n",arr_student[0].avg);
 }//end of get mark function
+
 int main(){
+    //this is login_sys.h
+    char reg_entry[2];//the keyys to be enterd will be stored in this array
+    char keyboard[]={'r','l'};//this are the key board keys to press
+    printf("Enter[r]to register a password or [l] to login to the system:");
+    scanf("%s",reg_entry);
+    //if the keyboard entry is in array keyboard[] then call the function  registration else call
+    //the log in function
+    if (reg_entry[0]==keyboard[0]){
+       registration_pssw(keyboard);
+    }
+    else if(reg_entry[0]==keyboard[1]){
+        log_in(keyboard);
+    }//end of log in
+
     int j;//the loop variable
     int num;
     char entry[10];//enter registration function
@@ -182,7 +206,7 @@ int main(){
              //[ 0   1   2   3   4   4]
     char key[]={'r','g','m','v','z','s'};//entry keys
     printf("Enter letter(r) to register_student:");
-    gets(entry);
+    scanf("%s",entry);
     printf("\n");
     if (entry[0]==key[0]){
         //only call the function if user input is (r)
@@ -209,5 +233,5 @@ int main(){
     }else{
         printf("oops no marks generated");
     }
-    get_higest_low_score(num,j);
+    get_higest_low_score(num,j);//get the scores of students
 }//the end of main function

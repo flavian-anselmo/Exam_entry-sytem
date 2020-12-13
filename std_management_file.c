@@ -4,6 +4,7 @@ can compute the grades and the average .The program finds the the student
 that had the highest marks */
 //{my freshman year project first semster}
 //I did this project to learn how file management works in C programming
+//This is a console application it has no GUI
 #include<stdio.h>
 #include "login_sys.c"
 #define N 16
